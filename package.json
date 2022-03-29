@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "name": "projeto3",
+  "version": "1.0.0",
+  "description": "Jogo de ficção interativa, feito para a Blue Edtech.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hethus/projeto3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hethus/projeto3/issues"
+  },
+  "homepage": "https://github.com/hethus/projeto3#readme",
+  "dependencies": {
+    "@nastyox/rando.js": "^2.0.5",
+    "chalk": "^5.0.1",
+    "enquirer": "^2.3.6",
+    "gradient-string": "^2.0.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
