@@ -38,12 +38,12 @@ let principal = {
 let questao = [{
     type: 'select',
     name: 'opcao',
-    message: `${chalk.green('sim')} ou ${chalk.red('não')}:
+    message: `${chalk.green('Sim')} ou ${chalk.red('Não')}:
     `,
     initial: 1,
     choices: [
-      { name: 'nao',   message: `${chalk.red('não')}`,   value: '#ff0000' }, //<= choice object
-      { name: 'sim', message: `${chalk.green('sim')}`, value: '#00ff00' }, //<= choice object
+      { name: 'nao',   message: `${chalk.red('Não')}`,   value: '#ff0000' }, //<= choice object
+      { name: 'sim', message: `${chalk.green('Sim')}`, value: '#00ff00' }, //<= choice object
     ]
   }]; //resposta = await prompt(modulo.questao) resposta.opcao  [se eu quiser usar sim ou não]
 
