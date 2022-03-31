@@ -84,12 +84,33 @@ if (resposta.opcao === 'sim') {
 
     await prompt(modulo.espera)
 
+    console.log(chalk.blue(`
+    Sem você perceber, já estava estava de manhã e você deitado, não era um ambiente que estava acostumado, mas sentia uma familiaridade...
+
+    Se levantando percebe que o seu corpo esta menor, ${chalk.cyan.italic(`'isso não faz sentido... não faz sentido...'`)} você pensa.
+
+    Seu arredor era de um quarto infantil!
+
+    ${chalk.cyan.italic(`'Espera aí... não... não vejo isso a anos!!!'`)}
+
+    As lembranças de quando era criança voltam a tona! Ou seria na verdade que tudo o que você viveu era um sonho e agora voltou ao seu eu original?
+
+    Seja o que for, seus pensamentos estão perdidos enquanto tenta se encontrar com o seu corpo... um simples pensamento nesse estado já é difícil de se manter...
+
+    Você se desequilibra e cai de novo na cama, refletindo sobre tudo o que aconteceu... ou tudo que vai acontecer? Os minutos passam sem você notar, parece que uma força misteriosa te pressionava cada vez mais!
+
+    -- ${gradient.atlas(`${modulo.principal.nome.toUpperCase()}`)} ${Chalk.magenta.bold(`NÃO LEVANTOU AINDA! SE EU TIVER QUE FALAR MAIS UMA VEZ EU VOU SUBIR AI PRA TE DAR UM CASCUDO QUE VAI TE DEIXAR MARCADO, TENHO QUE IR TRABALHAR AINDA MULEKE MAL EDUCADO!`)} - Diz uma voz vindo de fora do quarto.
+
+    A voz te deixa paralisado, mas te acorda daquele transe, então você levanta espantado!
+
+    -- ${chalk.cyan('M-Mãe?...')} - Você acha que é mentira, mas dessa vez os seus ouvidos não te enganaram, a voz que acabou de escutar é da sua mãe! Naquele pesadelo a sua mãe tinha morrido por causa de uma doença e viveu muitos anos sem ela, muitas coisas aconteceram depois que ela morreu, se afundou em dividas, começou a trabalhar e criou vícios, mas que bom que era só um sonho!
+    `))
+
     
     for(let i = 1; i <= 6; i++){
         console.log(chalk.red(`${i} dia`))
     }
 }
-
 
 //rando(5)
 //resposta = await prompt(modulo.questao) resposta.opcao  [se eu quiser usar sim ou não]

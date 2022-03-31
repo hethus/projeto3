@@ -14,9 +14,9 @@ let tempo = {
         console.log(`Hora: ${this.hora}:00 do ${this.dia}º dia`)
     },
     //função para passar um dia:
-    avancaTempo: function () {
+    avancaTempo: function (time) {
         if (this.hora < 23) {
-            this.hora++;
+          this.hora += time;
         } else {
             this.hora = 6;
             this.dia++;
