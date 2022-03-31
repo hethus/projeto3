@@ -104,11 +104,71 @@ if (resposta.opcao === 'sim') {
     A voz te deixa paralisado, mas te acorda daquele transe, então você levanta espantado!
 
     -- ${chalk.cyan('M-Mãe?...')} - Você acha que é mentira, mas dessa vez os seus ouvidos não te enganaram, a voz que acabou de escutar é da sua mãe! Naquele pesadelo a sua mãe tinha morrido por causa de uma doença e viveu muitos anos sem ela, muitas coisas aconteceram depois que ela morreu, se afundou em dividas, começou a trabalhar e criou vícios, mas que bom que era só um sonho!
-    `))
-
     
+    Agora que estava melhor, você começa a prestar mais atenção no quarto, vê um relógio na mesinha que usa para estudar, lá ele marca ${modulo.tempo.hora}:30 da ${modulo.tempo.saberDia()} e nesse instante se lembra que tem que entrar na escola as 7:30 da manhã!
+
+    -- ${chalk.cyan('Tenho que correr então!')} - Você fala com convicção!
+    `))
+    
+
     for(let i = 1; i <= 6; i++){
-        console.log(chalk.red(`${i} dia`))
+
+
+
+        if(modulo.tempo.dia !== 1){
+            console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00.`))
+
+            console.log(chalk.blue(`
+            Você acorda e levanta! o que vai querer fazer?
+            `))
+
+            resposta = await prompt(modulo.acordar)
+
+            if(resposta.opcao == 'Se arrumar rapidamente'){
+                console.log(chalk.blue(`
+                Você se arruma rapidamente e sai do quarto, já esperando a sua mãe!
+                `))
+
+                modulo.principal.responsa++
+            }else if(resposta.opcao == 'Demorar para se arrumar'){
+                console.log(chalk.blue(`
+                Você fica de bobeira por um bom tempo, se divertindo um pouco! Quando a sua mãe chama pelo seu nome, você se arruma e sai do quarto, ela não parece muito feliz não...
+                `))
+
+                modulo.principal.diversao++
+            }else if(resposta.opcao == 'Tomar banho e se arrumar'){
+                console.log(chalk.blue(`
+                Você levanta, separa sua roupa e já corre para o chuveiro! De lá você sai direto para esperar a sua mãe!
+                `))
+
+                modulo.principal.energia++
+            }
+        }else{ // só será executado no primeiro dia, ele é um pouco diferente do resto!
+            console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:45.`))
+
+            console.log(chalk.blue(`
+            Você já arrumado sai do quarto e desce as escadas, encontra a sua mãe nervosa contigo, mas isso não afeta as lagrimas em seus olhos! Você se aproxima e abraça ela, por um momento ela não entende muito o que esta acontecendo, mas acaba perdendo a raiva e te abraçando também!
+
+            -- ${chalk.cyan(`Bom dia, já esta tudo arrumado né? vamos para a escola então ${modulo.principal.nome}.`)} - ela fala sem jeito.
+            `))
+
+            resposta = await prompt(modulo.questao)
+
+            if(resposta.opcao === 'sim'){
+                console.log(chalk.cyan(`
+                -- Ótimo, vamos então!`))
+
+                modulo.principal.responsa++
+            } else{
+                console.log(chalk.cyan(`
+                -- Não! Então era por isso que queria me abraçar? Você já faltou muito, não vai faltar de novo!`))
+                
+                modulo.principal.responsa--
+            }
+
+
+        }
+
     }
 }
 
@@ -116,3 +176,4 @@ if (resposta.opcao === 'sim') {
 //resposta = await prompt(modulo.questao) resposta.opcao  [se eu quiser usar sim ou não]
 //await prompt(modulo.espera)
 //resposta = await prompt(modulo.trabalhe) resposta.trabalhe  [se eu quiser usar trabalhe ou trabalhe]
+//modulo.tempo // modulo.tempo.avancaTempo(time)

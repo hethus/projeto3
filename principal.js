@@ -8,10 +8,11 @@ const chalk = new Chalk.constructor({ level: 3 });
 
 let tempo = {
     hora: 6,
-    dia: 1,
-
+    dia: 2,
+    semana: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'sábado'],
+    //função para retornar o dia da semana:
     saberTempo: function () {
-        console.log(`Hora: ${this.hora}:00 do ${this.dia}º dia`)
+        console.log(chalk.red(`Hora: ${this.hora}:00 do ${this.dia}º dia`))
     },
     //função para passar um dia:
     avancaTempo: function (time) {
@@ -21,6 +22,11 @@ let tempo = {
             this.hora = 6;
             this.dia++;
         }
+    },
+
+    //função para saber qual é o dia da semana:
+    saberDia: function () {
+      return this.semana[this.dia];
     }
 }
 
@@ -29,7 +35,7 @@ let principal = {
     estudo: 10,
     dinheiro: 2,
     energia: 10,
-    diversão: 10,
+    diversao: 10,
     responsa: 10,
     amigo: 10,
     amiga: 10,
@@ -70,6 +76,18 @@ let questao = [{
     ]
 }]; // await prompt(modulo.espera)
 
+let acordar = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 1,
+  choices: [
+      { name: 'Se arrumar rapidamente', message: `${chalk.yellow.bold('Se arrumar rapidamente')}`},
+      { name: 'Demorar para se arrumar', message: `${chalk.yellow.bold('Demorar para se arrumar')}`},
+      { name: 'Tomar banho e se arrumar', message: `${chalk.yellow.bold('Tomar banho e se arrumar')}`},
+  ]
+}]; // pede a escolha do usuário ===== resposta = await prompt(modulo.acordar) / resposta.opcao
 
 
-export { tempo, principal, questao, trabalhe, espera}
+
+export { tempo, principal, questao, trabalhe, espera, acordar}
