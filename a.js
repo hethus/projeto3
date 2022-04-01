@@ -187,24 +187,75 @@ if (resposta.opcao === 'sim') {
             if(modulo.tempo.hora <= 11){ // manhã
                 console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00.`))
 
+                if(modulo.tempo.hora === 7){
                 console.log(chalk.blue(`
                 Você avança os corredores e tem um tempo antes do sinal tocar, o que deseja fazer?
                 `))
+                }else{
+                    console.log(chalk.blue(`
+                    Você se esgueira voltando para os corredores, eles estão vazios!
+
+                    O que você deseja fazer agora?
+                    `))
+                }
                 
                 resposta = await prompt(modulo.dentroEscola)
 
-                if(resposta.opcao == 'Socializar com os alunos'){
+                while(resposta.opcao == 'Socializar com os alunos'){
 
-                }else if(resposta.opcao == 'Ir direto para a sala'){
+                    console.log(chalk.blue(`
+                    Você segue 
+                    `)) // CONTINUAR HISTORIA AQUI
 
-                }else if(resposta.opcao == 'Vagar pela escola'){
+                    modulo.tempo.avancaTempo(1)
+                }
+                
+                while(resposta.opcao == 'Ir direto para a sala'){
+                    if(modulo.tempo.hora === 7){
+                        console.log(chalk.blue(`
+                        Você segue para a sala de aula, e o professor esta ai!
+                        `))
+                    }else{
+                        console.log(chalk.blue(`
+                        Você chega atrasado na aula!
+                        `))
+                    }
 
-                }else if(resposta.opcao == 'Usar o banheiro'){
+                    resposta = await prompt(modulo.aula)
 
-                }else if(resposta.opcao == 'Se esconder na biblioteca'){
+                    if(resposta.opcao == 'Socializar com os alunos'){ // CONTINUAR CODIGO AQUI
 
-                }else{
+                    }else if(resposta.opcao == 'Prestar atenção na aula'){
+
+                    }else if(resposta.opcao == 'Dormir na aula'){
+
+                    }else if(resposta.opcao == 'Fazer graça na sala'){
+
+                    }else if(resposta.opcao == 'Ficar sem fazer nada'){
+
+                    }
+
+                    console.log(chalk.blue(`
+                    A hora passou voando! Você repara que já esta na hora de ir embora e como sempre, as crianças todas gritando de felicidade pois estão indo embora!
+
+                    Você acha isso um pouco vergonhoso...
+                    `))
+
+                    let falta = 12 - modulo.tempo.hora
+                    modulo.tempo.hora += falta
                     break
+                }
+                
+                while(resposta.opcao == 'Vagar pela escola'){
+
+                }
+                
+                while(resposta.opcao == 'Usar o banheiro'){
+
+                }
+                
+                while(resposta.opcao == 'Se esconder na biblioteca'){
+
                 }
 
                 modulo.tempo.avancaTempo(5)
@@ -223,6 +274,8 @@ if (resposta.opcao === 'sim') {
                 `))
                 break
             }
+        
+        // colocar os sonhos aqui, como lista e usar o let i do for, colocar assim: ['', 'a', 'b', 'c', etc...]
         }
 
     }
