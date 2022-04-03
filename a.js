@@ -94,19 +94,19 @@ if (resposta.opcao === 'sim') {
     ${chalk.cyan.italic(`'Espera aí... não... não vejo isso a anos!!!'`)}
 
     As lembranças de quando era criança voltam a tona! Ou seria na verdade que tudo o que você viveu era um sonho e agora voltou ao seu eu original?
-
+     
     Seja o que for, seus pensamentos estão perdidos enquanto tenta se encontrar com o seu corpo... um simples pensamento nesse estado já é difícil de se manter...
-
+     
     Você se desequilibra e cai de novo na cama, refletindo sobre tudo o que aconteceu... ou tudo que vai acontecer? Os minutos passam sem você notar, parece que uma força misteriosa te pressionava cada vez mais!
-
+    
     -- ${gradient.atlas(`${modulo.principal.nome.toUpperCase()}`)} ${Chalk.magenta.bold(`NÃO LEVANTOU AINDA! SE EU TIVER QUE FALAR MAIS UMA VEZ EU VOU SUBIR AI PRA TE DAR UM CASCUDO QUE VAI TE DEIXAR MARCADO, TENHO QUE IR TRABALHAR AINDA MULEKE MAL EDUCADO!`)} - Diz uma voz vindo de fora do quarto.
-
+     
     A voz te deixa paralisado, mas te acorda daquele transe, então você levanta espantado!
 
     -- ${chalk.cyan('M-Mãe?...')} - Você acha que é mentira, mas dessa vez os seus ouvidos não te enganaram, a voz que acabou de escutar é da sua mãe! Naquele pesadelo a sua mãe tinha morrido por causa de uma doença e viveu muitos anos sem ela, muitas coisas aconteceram depois que ela morreu, se afundou em dividas, começou a trabalhar e criou vícios, mas que bom que era só um sonho!
     
     Agora que estava melhor, você começa a prestar mais atenção no quarto, vê um relógio na mesinha que usa para estudar, lá ele marca ${modulo.tempo.hora}:30 da ${modulo.tempo.saberDia()} e nesse instante se lembra que tem que entrar na escola as 7:30 da manhã!
-
+     
     -- ${chalk.cyan('Tenho que correr então!')} - Você fala com convicção!
     `))
     
@@ -178,7 +178,6 @@ if (resposta.opcao === 'sim') {
             Sua mãe te deixa na porta da escola, você se despede dela e entra na escola, mais lembranças jorram da sua cabeça, o que te faz lacrimejar, é uma sensação de "pensei nunca mais ver isso".
             `))
 
-            resposta = 'direto'
         }
         
         modulo.tempo.avancaTempo(1)
@@ -223,15 +222,30 @@ if (resposta.opcao === 'sim') {
 
                     resposta = await prompt(modulo.aula)
 
-                    if(resposta.opcao == 'Socializar com os alunos'){ // CONTINUAR CODIGO AQUI
+                    if(resposta.opcao == 'Socializar com os alunos'){
+                        console.log(chalk.blue(`
+                        Você de vez prestar atenção na aula, começa a conversar e brincar com os colegas.
+                        `))
 
                     }else if(resposta.opcao == 'Prestar atenção na aula'){
+                        console.log(chalk.blue(`
+                        Você sabia o que tinha que fazer! Sua mãe te deixou ali para estudar e é isso o que você faz, também não quer que aquele sonho ruim que teve se repita agora na vida real!
+                        `))
 
                     }else if(resposta.opcao == 'Dormir na aula'){
+                        console.log(chalk.blue(`
+                        Você se dirige para a sala e senta em uma das últimas cadeiras, se ajeita e espera o professor fazer a chamada para iniciar o seu sono, afinal, as aulas do dia eram muito chatas...
+                        `))
 
                     }else if(resposta.opcao == 'Fazer graça na sala'){
+                        console.log(chalk.blue(`
+                        O seu dia era tão chato e monótono antes, agora que tem outra chance de fazer as coisas diferentes, você começa a fazer piada e brincar com todos, ora fazendo eles rirem, ora fazendo o professor ficar um pouco irritado... bom, essa última parte não é muito boa né...
+                        `))
 
                     }else if(resposta.opcao == 'Ficar sem fazer nada'){
+                        console.log(chalk.blue(`
+                        Você se sente exausto e sem vontade de fazer qualquer coisa, a aula passa e você continua em seu mundinho...
+                        `))
 
                     }
 
@@ -247,18 +261,68 @@ if (resposta.opcao === 'sim') {
                 }
                 
                 while(resposta.opcao == 'Vagar pela escola'){
+                    console.log(chalk.blue(`
+                    Você anda um pouco pela escola enquanto o sinal não toca, encontra alguns colegas e alguns professores, o que deseja fazer?
+                    `))
 
+                    resposta = await prompt(modulo.vagaEscola)
+
+                    if(resposta.opcao == 'Socializar com os colegas'){
+                        console.log(chalk.blue(`
+                        Você começa a conversar com os seus colegas e não vê o tempo passando então o sinal toca!
+                        `))
+                    
+                    }else if (resposta.opcao == 'Conversar com os professores'){
+                        console.log(chalk.blue(`
+                        Você começa a conversar com os professores e não vê o tempo passando então o sinal toca!
+                        `))
+                    
+                    }else if (resposta.opcao == 'Fazer brincadeiras pesadas'){
+                        console.log(chalk.blue(`
+                        Você está cansado de aguentar aquela gritaria e tem uma péssima ideia de como pode ajeitar isso... você começa a fazer bullying com os colegas, alguns parecem tristes, outros sorriem mas não se sentem bem...
+                        `))
+
+                    }
+
+                    console.log(chalk.blue(`
+                    O sinal toca e você passa despercebido pelos colegas e pelos professores!
+                    `))
+
+                    modulo.tempo.avancaTempo(1);
+                    break
                 }
                 
                 while(resposta.opcao == 'Usar o banheiro'){
+                    console.log(chalk.blue(`
+                    Você sente que esta apertado e decide ir no banheiro, todos mictórios estão sendo usados, você espera todos usarem e o sinal toca, mas sente que realmente precisa ir no banheiro antes de voltar...
 
+                    Depois de um tempo você consegue a sua chance de se aliviar!
+                    `))
+
+                    modulo.tempo.avancaTempo(1);
+                    break
                 }
                 
-                while(resposta.opcao == 'Se esconder na biblioteca'){
+                while(resposta.opcao == 'Se esconder na biblioteca'){ //colocar aleatorio
+                    console.log(chalk.blue(`
+                    Você lembra de um lugar na biblioteca onde quase ninguém pode te incomodar! Ótimo para descansar e se divertir!
+
+                    Se escondendo lá ninguém te incomoda e o sinal toca, agora parece que estará sozinho por um bom tempo, o que deseja fazer?
+                    `))
+
+                    resposta = await prompt(modulo.biblioteca)
+
+                    if(resposta.opcao == 'Dormir até a hora de ir embora'){
+                        console.log(chalk.blue(`
+                        Você se sente muito bem, sem nenhum vestígio de culta e decide dormir, 
+                        `))
+
+                    }
+
+
 
                 }
 
-                modulo.tempo.avancaTempo(5)
             }else if(modulo.tempo.hora <= 17){ // tarde
                 console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00.`))
 

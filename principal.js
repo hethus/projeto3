@@ -125,4 +125,28 @@ let aula = [{
   ]
 }];
 
-export { tempo, principal, questao, trabalhe, espera, acordar, entrarEscola, dentroEscola, aula}
+let andarEscola = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: 'Socializar com os colegas', message: `${chalk.yellow.bold('Socializar com os colegas')}`},
+      { name: 'Conversar com os professores', message: `${chalk.yellow.bold('Conversar com os professores')}`},
+      { name: 'Fazer brincadeiras pesadas', message: `${chalk.yellow.bold('Fazer brincadeiras pesadas')}`},
+  ]
+}];
+
+let biblioteca = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: 'Dormir até a hora de ir embora', message: `${chalk.yellow.bold('Dormir até a hora de ir embora')}`},
+      { name: 'Ler algum livro disponível', message: `${chalk.yellow.bold('Ler algum livro disponível')}`},
+      { name: 'Riscar os livros dos professores', message: `${chalk.yellow.bold('Riscar os livros dos professores')}`},
+  ]
+}];
+
+export { tempo, principal, questao, trabalhe, espera, acordar, entrarEscola, dentroEscola, aula, andarEscola, biblioteca }
