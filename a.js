@@ -111,7 +111,7 @@ if (resposta.opcao === 'sim') {
     `))
     
 
-    for(let i = 1; i <= 6; i++){
+    for( ; modulo.tempo.dia <= 6; modulo.tempo.dia++){
 
         if(modulo.tempo.dia !== 1){
             console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00.`))
@@ -143,12 +143,9 @@ if (resposta.opcao === 'sim') {
             }
 
             console.log(chalk.blue(`
-            Vocês entram no carro e seguem rumo a escola, chegando na porta da escola, a sua mãe abre a porta do carro e depois de se despedir dela, você sai do carro.
-
-            E agora? o que escolherá?
+            Vocês entram no carro e seguem rumo a escola, chegando na porta da escola, a sua mãe abre a porta do carro e depois de se despedir dela, você sai do carro e entra na escola.
             `))
-
-            resposta = await prompt(modulo.entrarEscola)
+            
         }else{ // só será executado no primeiro dia, ele é um pouco diferente do resto!
             console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:45.`))
 
@@ -190,63 +187,87 @@ if (resposta.opcao === 'sim') {
                 console.log(chalk.blue(`
                 Você avança os corredores e tem um tempo antes do sinal tocar, o que deseja fazer?
                 `))
+
+                resposta = await prompt(modulo.dentroEscola)
                 }else{
                     console.log(chalk.blue(`
                     Você se esgueira voltando para os corredores, eles estão vazios!
 
                     O que você deseja fazer agora?
                     `))
+
+                    resposta = await prompt(modulo.atrasado)
                 }
                 
-                resposta = await prompt(modulo.dentroEscola)
-
                 while(resposta.opcao == 'Socializar com os alunos'){
 
                     console.log(chalk.blue(`
-                    Você segue 
-                    `)) // CONTINUAR HISTORIA AQUI
+                    Você fica no pátio da escola conversando com os alunos e esquece da hora, afinal... a sua sala é bem longe dali, o sinal toca e você tem que voltar para o corredor principal!
+                    `))
 
                     modulo.tempo.avancaTempo(1)
+                    modulo.principal.social++
+                    break
                 }
                 
                 while(resposta.opcao == 'Ir direto para a sala'){
                     if(modulo.tempo.hora === 7){
                         console.log(chalk.blue(`
-                        Você segue para a sala de aula, e o professor esta ai!
+                        Você segue para a sala de aula, o professor está na porta recebendo os alunos, todos se sentam e a aula começa.
+
+                        O que você irá fazer?
                         `))
                     }else{
                         console.log(chalk.blue(`
-                        Você chega atrasado na aula!
+                        Você chega atrasado na aula! O professor não fica muito feliz com isso... você se desculpa com ele e vai em direção ao seu lugar.
+                        
+                        O que irá fazer agora?
                         `))
+
+                        modulo.principal.estudo--
                     }
 
                     resposta = await prompt(modulo.aula)
 
                     if(resposta.opcao == 'Socializar com os alunos'){
                         console.log(chalk.blue(`
-                        Você de vez prestar atenção na aula, começa a conversar e brincar com os colegas.
+                        Você de vez prestar atenção na aula, começa a conversar e brincar com os colegas. Todos vocês se divertem e nem ligam para o que o professor está dizendo, quem se importa né? Nada do que ele diz ali será útil para a vida mesmo... 
                         `))
+
+                        modulo.principal.estudo--
+                        modulo.principal.social++
 
                     }else if(resposta.opcao == 'Prestar atenção na aula'){
                         console.log(chalk.blue(`
                         Você sabia o que tinha que fazer! Sua mãe te deixou ali para estudar e é isso o que você faz, também não quer que aquele sonho ruim que teve se repita agora na vida real!
                         `))
 
+                        modulo.principal.estudo++
+
                     }else if(resposta.opcao == 'Dormir na aula'){
                         console.log(chalk.blue(`
                         Você se dirige para a sala e senta em uma das últimas cadeiras, se ajeita e espera o professor fazer a chamada para iniciar o seu sono, afinal, as aulas do dia eram muito chatas...
                         `))
+
+                        modulo.principal.estudo--
+                        modulo.principal.energia++
 
                     }else if(resposta.opcao == 'Fazer graça na sala'){
                         console.log(chalk.blue(`
                         O seu dia era tão chato e monótono antes, agora que tem outra chance de fazer as coisas diferentes, você começa a fazer piada e brincar com todos, ora fazendo eles rirem, ora fazendo o professor ficar um pouco irritado... bom, essa última parte não é muito boa né...
                         `))
 
+                        modulo.principal.estudo -= 2
+                        modulo.principal.diversao += 2
+
+
                     }else if(resposta.opcao == 'Ficar sem fazer nada'){
                         console.log(chalk.blue(`
                         Você se sente exausto e sem vontade de fazer qualquer coisa, a aula passa e você continua em seu mundinho...
                         `))
 
+                        modulo.principal.estudo--
+                        modulo.principal.energia++
                     }
 
                     console.log(chalk.blue(`
@@ -271,21 +292,31 @@ if (resposta.opcao === 'sim') {
                         console.log(chalk.blue(`
                         Você começa a conversar com os seus colegas e não vê o tempo passando então o sinal toca!
                         `))
+
+                        modulo.principal.social++
+                        modulo.principal.diversao++
                     
                     }else if (resposta.opcao == 'Conversar com os professores'){
                         console.log(chalk.blue(`
                         Você começa a conversar com os professores e não vê o tempo passando então o sinal toca!
                         `))
+
+                        modulo.principal.social++
+                        modulo.principal.estudo++
                     
                     }else if (resposta.opcao == 'Fazer brincadeiras pesadas'){
                         console.log(chalk.blue(`
                         Você está cansado de aguentar aquela gritaria e tem uma péssima ideia de como pode ajeitar isso... você começa a fazer bullying com os colegas, alguns parecem tristes, outros sorriem mas não se sentem bem...
                         `))
 
+                        modulo.principal.social -= 3
+                        modulo.principal.diversao += 2
+                        modulo.principal.responsa--
+
                     }
 
                     console.log(chalk.blue(`
-                    O sinal toca e você passa despercebido pelos colegas e pelos professores!
+                    O sinal toca e você passa despercebido pelos colegas e pelos professores! Eram tantas pessoas se movendo que você acaba passando sem ser notado, como se fosse invisível mesmo...
                     `))
 
                     modulo.tempo.avancaTempo(1);
@@ -298,6 +329,8 @@ if (resposta.opcao === 'sim') {
 
                     Depois de um tempo você consegue a sua chance de se aliviar!
                     `))
+
+                    modulo.principal.energia++
 
                     modulo.tempo.avancaTempo(1);
                     break
@@ -314,13 +347,82 @@ if (resposta.opcao === 'sim') {
 
                     if(resposta.opcao == 'Dormir até a hora de ir embora'){
                         console.log(chalk.blue(`
-                        Você se sente muito bem, sem nenhum vestígio de culta e decide dormir, 
+                        Você se sente muito bem, sem nenhum vestígio de culpa e decide dormir até a hora de ir embora!
                         `))
 
+                        modulo.principal.energia += 2
+
+                    }else if(resposta.opcao == 'Ler algum livro disponível'){
+                        console.log(chalk.blue(`
+                        Você começa a ler um livro que encontra por aí na biblioteca e o tempo passa...
+                        `))
+                        
+                        let livro = rando(3)
+
+                        if(livro == 1){
+                            console.log(chalk.blue(`
+                            O livro é um romance qualquer, um bom livro para passar o tempo, mas nada de muito interessante...
+                            `))
+
+                        }else if(livro == 2){
+                            console.log(chalk.blue(`
+                            O livro é de ficção, você se sente inspirado e sente que ficou um pouco mais inteligente!
+                            `))
+
+                            modulo.principal.estudo += 1
+
+                        }else if(livro == 3){
+                            console.log(chalk.blue(`
+                            O livro é de investigação, você sente que entende melhor como as coisas funcionam "pelo menos é o que você sente", o que aumenta a sua segurança e inteligencia!
+                            `))
+
+                            modulo.principal.estudo += 1
+                            modulo.principal.social += 1
+
+                        }
+
+                    }else if(resposta.opcao == 'Riscar os livros dos professores'){
+                        console.log(chalk.blue(`
+                        Você sente uma imensa tentação quando olha para a mesa vazia da biblioteca e vê que os professores esqueceram as suas cadernetas.... sente uma sensação de querer devolver tudo o que fizeram com você naquele sonho, então sem pensar muito você decide riscar os livros dos professores!
+                        `))
+
+                        let livro = rando(10)
+
+                        if(livro <= 2){
+                            console.log(chalk.blue(`
+                            Você começa a riscar os livros, sem se importar com mais nada! o tempo vai passando e você continua entretido, mas de repente o pior acontece, um professor viu você riscando os livros, você fica desesperado...
+                            
+                            O professor fica muito irritado com isso, mas depois de um tempo ele diz que não vai te levar para a direção...
+
+                            Com uma condição, vai ter que fazer provas mais difíceis e ele vai pedir para a sua mâe ficar de olho em você...
+                            `))
+
+                            modulo.principal.estudo -= 2
+                            modulo.principal.responsa -= 2
+
+                        }else{
+                            console.log(chalk.blue(`
+                            Você fica tão entretido em riscar os livros que esquece de todo o resto, para você naquele momento, esta fazendo a maior e mais perfeita vingança contra toda nota baixa que essa sociedade injusta de professores fez a você!!!!
+                            `))
+
+                            modulo.principal.diversao += 3
+
+                        }
+                    }else if(resposta.opcao == 'Voltar para o corredor'){
+                        console.log(chalk.blue(`
+                        Você decide que por hoje esta bom de ficar na biblioteca, então decide voltar...
+                        `))
+
+                        break
                     }
 
+                    console.log(chalk.blue(`
+                    Quando você menos espera já esta na hora de ir embora, parece que o dia passou muito rápido!
+                    `))
 
-
+                    let falta = 12 - modulo.tempo.hora
+                    modulo.tempo.hora += falta
+                    break
                 }
 
             }else if(modulo.tempo.hora <= 17){ // tarde

@@ -86,17 +86,6 @@ let acordar = [{
   ]
 }]; // pede a escolha do usuário ===== resposta = await prompt(modulo.acordar) / resposta.opcao
 
-let entrarEscola = [{
-  type: 'select',
-  name: 'opcao',
-  message: ' ',
-  initial: 0,
-  choices: [
-      { name: 'Entrar na escola', message: `${chalk.yellow.bold('Entrar na escola')}`},
-      { name: 'Matar aula', message: `${chalk.yellow.bold('Matar aula')}`},
-  ]
-}]; // pede a escolha do usuário ===== resposta = await prompt(modulo.entrarEscola) / resposta.opcao
-
 let dentroEscola = [{
   type: 'select',
   name: 'opcao',
@@ -108,6 +97,17 @@ let dentroEscola = [{
       { name: 'Vagar pela escola', message: `${chalk.yellow.bold('Vagar pela escola')}`},
       { name: 'Usar o banheiro', message: `${chalk.yellow.bold('Usar o banheiro')}`},
       { name: 'Se esconder na biblioteca', message: `${chalk.yellow.bold('Se esconder na biblioteca')}`},
+  ]
+}];
+
+let atrasado = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: 'Socializar com os alunos', message: `${chalk.yellow.bold('Socializar com os alunos')}`},
+      { name: 'Ir direto para a sala', message: `${chalk.yellow.bold('Ir direto para a sala')}`}, 
   ]
 }];
 
@@ -146,7 +146,8 @@ let biblioteca = [{
       { name: 'Dormir até a hora de ir embora', message: `${chalk.yellow.bold('Dormir até a hora de ir embora')}`},
       { name: 'Ler algum livro disponível', message: `${chalk.yellow.bold('Ler algum livro disponível')}`},
       { name: 'Riscar os livros dos professores', message: `${chalk.yellow.bold('Riscar os livros dos professores')}`},
+      { name: 'Voltar para o corredor', message: `${chalk.yellow.bold('Voltar para o corredor')}`},
   ]
 }];
 
-export { tempo, principal, questao, trabalhe, espera, acordar, entrarEscola, dentroEscola, aula, andarEscola, biblioteca }
+export { tempo, principal, questao, trabalhe, espera, acordar, dentroEscola, aula, andarEscola, biblioteca, atrasado }
