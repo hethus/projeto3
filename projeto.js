@@ -1,6 +1,6 @@
 import Chalk from 'chalk';
 const chalk = new Chalk.constructor({ level: 3 });
-import * as modulo from './principal.js'
+import * as modulo from './modulo.js'
 import gradient from 'gradient-string';
 import enquirer from 'enquirer';
 const { prompt } = enquirer;
@@ -9,6 +9,16 @@ import { rando, randoSequence } from '@nastyox/rando.js';
 
 // variaveis:
 let resposta = ''
+let prova = 0
+let vitima = 0
+let escapou = 0
+let naoEscapou = 0
+let frio = 0
+let sol = 0
+let conversouMãe = 0
+let ajudou = 0
+let dinheiroRua = 0
+let perdeuDinheiro = 0
 
 // começo do jogo:
 console.clear()
@@ -16,7 +26,7 @@ console.clear()
 resposta = await prompt({
     type: 'input',
     name: 'nome',
-    message: 'Digite do seu personagem antes de iniciar o jogo: ',
+    message: 'Digite do seu personagem antes de iniciar: ',
     validate: value => {
         if (value != '' && value != null && isNaN(value) && value != undefined) {
             return true;
@@ -28,9 +38,20 @@ resposta = await prompt({
 modulo.principal.nome = resposta.nome
 
 console.log();
+console.log();
 
+console.log(gradient('red', 'cyan').multiline([
+'██     ██ ██   ██ ██ ██      ███████      ██ ██      ██ ██    ██ ███████ ██      ██▀ ▀██',
+'██     ██ ██   ██ ██ ██      ██          ██  ██      ██ ██    ██ ██       ██     ██   ██',
+'██  █  ██ ███████ ██ ██      █████       ██  ██      ██ ██    ██ █████    ██    ██     ██',
+'██ ███ ██ ██   ██ ██ ██      ██          ██  ██      ██  ██  ██  ██       ██     ██   ██ ',
+' ███ ███  ██   ██ ██ ███████ ███████      ██ ███████ ██   ████   ███████ ██      ██▄ ▄██ ',
+                                                                                         
+].join('\n')));
 
-console.log(`iniciar jogo? (lembre-se de escolher as opções na tela usando as setinhas e apertando enter!)`)
+console.log();
+
+console.log(`Iniciar jogo? (lembre-se de escolher as opções na tela usando as setinhas e apertando enter!)`)
 resposta = await prompt(modulo.questao)
 
 
@@ -87,11 +108,11 @@ if (resposta.opcao === 'sim') {
     console.log(chalk.blue(`
     Sem você perceber, já estava estava de manhã e você deitado, não era um ambiente que estava acostumado, mas sentia uma familiaridade...
 
-    Se levantando percebe que o seu corpo esta menor, ${chalk.cyan.italic(`'isso não faz sentido... não faz sentido...'`)} você pensa.
+    Se levantando percebe que o seu corpo esta menor, ${chalk.cyan.italic(`"isso não faz sentido... não faz sentido..."`)} você pensa.
 
     Seu arredor era de um quarto infantil!
 
-    ${chalk.cyan.italic(`'Espera aí... não... não vejo isso a anos!!!'`)}
+    ${chalk.cyan.italic(`"Espera aí... não... não vejo isso a anos!!!"`)}
 
     As lembranças de quando era criança voltam a tona! Ou seria na verdade que tudo o que você viveu era um sonho e agora voltou ao seu eu original?
      
@@ -115,7 +136,9 @@ if (resposta.opcao === 'sim') {
 
     for( ; modulo.tempo.dia <= 6; modulo.tempo.dia++){
 
-        if(modulo.tempo.dia !== 1){
+        if(modulo.tempo.dia != 6){
+
+            if(modulo.tempo.dia !== 1){
             console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00. ${modulo.tempo.saberDia()}`))
 
             console.log(chalk.blue(`
@@ -148,13 +171,13 @@ if (resposta.opcao === 'sim') {
             Vocês entram no carro e seguem rumo a escola, chegando na porta da escola, a sua mãe abre a porta do carro e depois de se despedir dela, você sai do carro e entra na escola.
             `))
             
-        }else{ // só será executado no primeiro dia, ele é um pouco diferente do resto!
+            }else{ // só será executado no primeiro dia, ele é um pouco diferente do resto!
             console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:45.`))
 
             console.log(chalk.blue(`
             Você já arrumado sai do quarto e desce as escadas, encontra a sua mãe nervosa contigo, mas isso não afeta as lagrimas em seus olhos! Você se aproxima e abraça ela, por um momento ela não entende muito o que esta acontecendo, mas acaba perdendo a raiva e te abraçando também!
 
-            -- ${chalk.cyan(`Bom dia, já esta tudo arrumado né? vamos para a escola então ${modulo.principal.nome}.`)} - ela fala sem jeito.
+            -- ${chalk.magenta(`Bom dia, já esta tudo arrumado né? vamos para a escola então ${modulo.principal.nome}.`)} - ela fala sem jeito.
             `))
 
             resposta = await prompt(modulo.questao)
@@ -177,9 +200,10 @@ if (resposta.opcao === 'sim') {
             Sua mãe te deixa na porta da escola, você se despede dela e entra na escola, mais lembranças jorram da sua cabeça, o que te faz lacrimejar, é uma sensação de "pensei que nunca mais veria isso".
             `))
 
-        }
+            }
         
         modulo.tempo.avancaTempo(1)
+        }
 
         while(true){
             if(modulo.tempo.hora <= 11 && modulo.tempo.dia != 6 && modulo.tempo.dia != 5){ // manhã
@@ -452,15 +476,88 @@ if (resposta.opcao === 'sim') {
                 console.log(chalk.blue(`
                 Você avança os corredores e vê que não tem ninguém nos corredores, você acha muito estranho isso...
 
-                ${chalk.cyan.italic('Será que hoje não tem aula???')} 
+                ${chalk.cyan.italic('"Será que hoje não tem aula???"')} 
                 
                 Após alguns minutos perdido um professor te encontra.
 
                 -- ${chalk.blueBright('Esqueceu qual é a sua sala? Bora lá vou te levar, hoje tem prova!')} - O professor diz.
 
-                Você começa a pensar e pensar, mas só depois de um tempo que a sua mente volta a funcionar ${chalk.cyan.italic('PROVA! QUEEEEEE, EU NEM SABIA, QUE MERDA!!!')}
+                Você começa a pensar e pensar, mas só depois de um tempo que a sua mente volta a funcionar ${chalk.cyan.italic('"PROVA! QUEEEEEE, EU NEM SABIA, QUE MERDA!!!"')}
 
-                Suor frio começa a escorrer e um sorriso amarelo se estampa no seu rosto 
+                Suor frio começa a escorrer e um sorriso amarelo se estampa no seu rosto.
+
+                Você entra na sala e senta no seu lugar, estando bem apreensivo, não consegue pensar em nada além de ${chalk.cyan.italic('"DEU MERDA"')}.
+                `))
+
+                modulo.tempo.avancaTempo(1)
+
+                console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00.`))
+
+                console.log(chalk.blue(`
+                -- ${chalk.blueBright('Agora são', modulo.tempo.hora,':00, vocês tem até a hora de ir embora para terminar a prova! Não precisam ficar nervosos e com receio, se estudaram pelo menos um pouco, vão conseguir uma boa nota, afinal, é uma prova de todo conteúdo ensinado em sala!')} - O professor diz.
+
+                Depois de falar isso, ele começa a entregar as provas e a avaliação se inicia!
+                `))
+
+                if(modulo.principal.estudo <= 10){
+                    console.log(chalk.blue(`
+                    Por mais que tente ler a prova, você não consegue entender nada... as horas vão passando e passando, mas as respostas não aparecem na sua cabeça...
+
+                    O professor fala que logo logo a prova irá acabar, então você decide que terá que chutar essa bosta!
+                    `))
+
+                    let numero = rando(55)
+
+                    prova = modulo.resultadoProva(numero)
+
+                }else if(modulo.principal.estudo > 10 && modulo.principal.estudo <= 15){
+                    console.log(chalk.blue(`
+                    Você consegue ler algumas coisas na prova! Não é o ideal, mas pelo menos sabe que não irá precisar chutar toda a prova...
+
+                    Depois de conseguir resolver as questões que sabia, o professor diz que a prova logo logo irá acabar, então você já começa a chutar as outras questões!
+                    `))
+
+                    let numero = rando(21)
+
+                    prova = modulo.resultadoProva(numero)
+                }else if(modulo.principal.estudo > 15 && modulo.principal.estudo <= 20){
+                    console.log(chalk.blue(`
+                    Ufa em, recendo a prova você nota que não é um bicho de 7 cabeças, até que dá para fazer tranquilamente e tirar uma boa nota!
+
+                    Você fica feliz que tirou um tempo a mais para estudar!
+                    `))
+
+                    let numero = rando(10)
+
+                    prova = modulo.resultadoProva(numero)
+                }else if(modulo.principal.estudo > 20 && modulo.principal.estudo <= 25){
+                    console.log(chalk.blue(`
+                    Depois de estudar tanto você tem a certeza que irá tirar uma boa nota, as perguntas não são nada difíceis.
+
+                    Sabe que com certeza irá tirar mais que 7!
+                    `))
+
+                    let numero = rando(3)
+
+                    prova = modulo.resultadoProva(numero)
+                }else if(modulo.principal.estudo > 25){
+                    console.log(chalk.blue(`
+                    Você até acha estranho quando recebe a prova, parece que faz anos que não faz uma, mas mesmo assim consegue ler todas as perguntas e entender o que é pedido muito rapidamente!
+
+                    Você se sente muito confiante, talvez consiga um 10?
+                    `))
+
+                    prova = modulo.resultadoProva(1)
+                }
+
+                modulo.tempo.hora = 12
+
+                console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00.`))
+
+                console.log(chalk.blue(`
+                Exatamente às ${modulo.tempo.hora}:00, o professor termina de recolher as provas e dispensa todos os alunos.
+
+                Fora da sala você faz um último pedido aos céus para que consiga uma boa nota...
                 `))
             }else if(modulo.tempo.hora <= 17 && modulo.tempo.dia != 6){ // tarde
 
@@ -478,6 +575,8 @@ if (resposta.opcao === 'sim') {
                     `))
 
                     modulo.principal.energia--
+                    sol++
+
                     }else if(tempo == 2){
                     console.log(chalk.blue(`
                     Você sai da escola e segue direto para a sua casa, hoje por sorte é um dia que esta ventando e não está muito quente, o que te faz sentir que nem cansou quando chegou ao destino final!
@@ -491,6 +590,8 @@ if (resposta.opcao === 'sim') {
                     `))
 
                     modulo.principal.energia--
+                    frio++
+
                 }
 
                 if(dinheiro == 1){
@@ -499,20 +600,23 @@ if (resposta.opcao === 'sim') {
                     `))
 
                     modulo.principal.dinheiro += 15
+                    dinheiroRua++
                 }else if(dinheiro >= 2 && dinheiro <= 4){
                     console.log(chalk.blue(`
                     Andando por uma rua perto da sua casa, você encontra 2 reais jogados no chão... Não é muito, mas com certeza é melhor do que nada!
                     `))
 
                     modulo.principal.dinheiro += 2
+                    dinheiroRua++
                 }else if(dinheiro == 10){
                     console.log(chalk.blue(`
                     Você tropeça no chão, sente uma dor no dedo do pé, mas continua andando, esperando que ninguém tenha visto o que aconteceu...
 
-                    ${chalk.cyan.italic('espero que essa dor passe logo, não quero ficar mancando até chegar em casa, será que hoje é meu dia de azar? Caramba que dor!')}
+                    ${chalk.cyan.italic('"espero que essa dor passe logo, não quero ficar mancando até chegar em casa, será que hoje é meu dia de azar? Caramba que dor!"')}
                     `))
 
                     modulo.principal.dinheiro -= 2
+                    perdeuDinheiro++
                 }
 
                 if(assalto == 1){
@@ -522,6 +626,8 @@ if (resposta.opcao === 'sim') {
                     --${chalk.grey('Isso é um assalto! Passe agora o seu dinheiro!')} - Ele fala com uma voz firme.
                     `))
 
+                    vitima++
+
                     if(modulo.principal.energia <= 15){
                         console.log(chalk.blue(`
                         Você não tem muita reação além de entregar o seu dinheiro e ver ele indo embora... você com medo de ele te seguir ou voltar para tentar roubar mais, começa a correr até chegar na sua casa!
@@ -530,12 +636,14 @@ if (resposta.opcao === 'sim') {
                         `))
 
                         modulo.principal.dinheiro = 0
+                        naoEscapou++
                     }else if(modulo.principal.energia > 15){
                         console.log(chalk.blue(`
                         Você sem pensar duas vezes consegue ter uma reação bem rápida, virando a esquina e já começando a correr, você consegue despistar o ladrão sem perder nada! Mas por causa disso, o seu coração está tão acelerado que parecia que iria levantar voo e seu corpo estava pulando de adrenalina!
                         `))
 
                         modulo.principal.energia -= 5
+                        escapou++
                     }
 
                 
@@ -707,6 +815,8 @@ if (resposta.opcao === 'sim') {
                 O que deseja fazer nesse meio tempo?
                 `))
 
+                conversouMãe++
+
                 let resposta = await prompt(modulo.noite)
 
                 if(resposta.opcao == 'Estudar mais um pouco'){
@@ -736,6 +846,8 @@ if (resposta.opcao === 'sim') {
                     modulo.principal.social++
                     modulo.principal.responsa += 2
                     modulo.principal.diversao++
+                    ajudou++
+                    conversouMãe++
                 }else if(resposta.opcao == 'Descansar até a hora da janta'){
                     console.log(chalk.blue(`
                     Mesmo que depois da janta já iria dormir, você decide descansar esse pequeno tempo até a janta ficar pronta, pelo menos se conseguir colocar os pensamentos no lugar já está bom para você.
@@ -757,16 +869,102 @@ if (resposta.opcao === 'sim') {
                 `))
 
                 modulo.tempo.avancaTempo(3)
+                conversouMãe++
 
             }else if(modulo.tempo.hora >= 23 && modulo.tempo.dia != 6){ // sonho
 
                 console.log(chalk.blue(`
                 Infelizmente quando vocês acabam de terminar tudo, já sabem que terão que dormir logo para acordar no próximo dia, sendo assim, você segue para o banheiro, escova os dentes e faz as suas necessidades básicas, depois se dirige para o quarto.
 
-                ${chalk.cyan.italic('Espero que isso não seja um sonho...')} Você pensa enquanto pega no sonho.
+                ${chalk.cyan.italic('"Espero que isso não seja um sonho..."')} Você pensa enquanto pega no sonho.
                 `))
 
                 modulo.tempo.avancaTempo(1)
+                break
+            }else if(modulo.tempo.dia == 6){ // sábado
+                console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00, ${modulo.tempo.saberDia()}
+                `))
+
+                console.log(chalk.blue(`
+                Você acorda hoje mais tarde, virando na cama sente até preguiça de levantar, essa vida é muito diferente do que estava acostumado naquele sonho.
+
+                Passando mais alguns minutos você finalmente decide levantar, até pelo motivo de não estar conseguindo voltar a dormir.
+
+                Depois de escovar os dentes e tomar banho, você olha para o calendário, na verdade é a primeira vez que olha no calendário durante a semana inteira, então vê que hoje era dia 10/07, essa data não era muito estranha para você...
+                
+                O que te faz refletir, parece que está esquecendo de algo muito importante, o que será?
+
+                ${chalk.cyan.italic('"Caramba... NÃO CREIO, É ISSO O QUE EU ESQUECI???? MEU DEUS, COMO EU POSSO ESQUECER O ANIVERSÁRIO DA MINHA MÃE?????"')} Você pensa olhando aflito para o calendário, ${chalk.cyan.italic('"Eu tenho que dar parabéns para ela, será que consigo dar algo como presente?"')}
+
+                Então após pensar mais alguns minutos, você resolve fazer um bolo enquanto ela não acordou e entregar o dinheiro que conseguiu para ela!
+                `))
+
+                modulo.tempo.avancaTempo(2)
+
+                console.log(chalk.red(`Um tempo depois: às ${modulo.tempo.hora}:00
+                `))
+                
+                console.log(chalk.blue(`Você consegue terminar o bolo e enfeitar um pouco a sala, não é grande coisa, mas você acredita que a sua mãe vai gostar.
+                
+                Levando um pouco de café na xícara para a sua mãe, você a desperta e dá um abraço nela, depois de um tempo, você pede para ela se levantar e seguir você até a sala.
+
+                Chegando lá você começa a cantar parabéns para ela e consegue observar que os olhos de sua mãe estão cheios de lágrimas, com certeza ela não esperava por essa surpresa!
+
+                -- ${chalk.magenta('Obrigada meu filho, tenho orgulho de ter um filho tão bom como você!')}
+
+                Depois disso vocês conversam um pouco mais...
+
+                Até você falar:`))
+
+                if(modulo.principal.dinheiro <= 5){
+                    console.log(chalk.blue(`
+                    -- ${chalk.cyan('Desculpe mãe, eu queria te dar um presente, mas não encontrei nada e também acabei ficando sem dinheiro, queria te entregar pelo menos um pouco para te ajudar...')}
+
+                    -- ${chalk.magenta('Tudo bem', modulo.principal.nome, 'você já é o melhor presente que eu poderia pedir!')}
+
+                    Depois de escutar isso, você fica envergonhado...
+                    `))
+                }else if(modulo.principal.dinheiro > 5 && modulo.principal.dinheiro <= 20){
+                    console.log(chalk.blue(`
+                    -- ${chalk.cyan('Tome mãe, não é muito, mas acho que já irá te ajudar, não consegui um presente, mas com o dinheiro, você pode comprar alguma coisa que queira')}
+
+                    -- ${chalk.magenta('Não precisava', modulo.principal.nome,'... você já é o melhor presente que eu poderia pedir, não precisava me dar dinheiro, mas como sei que você é teimoso, eu vou aceitar')} - A sua mãe fala, lacrimejando.
+
+                    -- ${chalk.cyan(`Te amo mãe!`)} - Depois de dizer isso, você a abraça novamente!
+                    `))
+                }else if(modulo.principal.dinheiro > 10 && modulo.principal.dinheiro <= 50){
+                    console.log(chalk.blue(`
+                    -- ${chalk.cyan('Mãe, eu não consegui mais do que isso, me desculpe, também não consegui encontrar nenhum presente melhor, mas espero que esse dinheiro ajude a senhora a se sentir mais feliz e quem sabe ajudar em CASA')} - Você diz entregando o dinheiro e depois abraça a sua mãe!
+
+                    -- ${chalk.magenta('Ah... Filho, muito obrigada, eu... nós estamos... deixa isso pra outro momento. Muito obrigado meu filho, te amo muito, você é a razão de eu acordar todo dia e ir trabalhar! Nunca se esqueça...')} - A sua mãe fala, parecia que a expressão dela era feliz e triste ao mesmo tempo...
+                    `))
+                }else if(modulo.principal.dinheiro > 50){
+                    console.log(chalk.blue(`
+                    -- ${chalk.cyan('MÃEEEEE! Tenho uma surpresa para você!!!! Trate de aceitar em, claro que não é um presente muito grande, mas é o que eu tenho para você, use para comprar algo que a senhora goste, ou para te ajudar em algo!!')} - Você diz entregando o dinheiro e depois abraça a sua mãe, você estava feliz.
+
+                    -- ${chalk.magenta(modulo.principal.nome, 'não precisava.... ah, te amo muito meu filho, você não sabe o quanto...')} - Nesse momento a sua mãe começa a chorar - ${chalk.magenta('Não queria falar para te preocupar, mas eu estou passando por dificuldades, o meu chefe não está pagando tudo que ele prometeu e as contas estão acumulando, esse presente que você me deu meu filho, é uma força a mais para conseguir aguentar tudo, mas pode ter certeza que estarei sempre aqui por você!')}
+                    
+                    Você fica muito triste, algumas memórias daquele pesadelo invadem a sua cabeça, nele a sua mãe ficou doente por trabalhar de mais...
+
+                    -- ${chalk.cyan('Eu estou aqui contigo mãe, irei te ajudar!')} - Você diz abraçando ela mais forte e mais forte...
+                    `))
+                }
+
+                console.log(chalk.blue(`
+                Depois que as emoções do aniversário acabaram, você começa a limpar tudo o que sujou para a festa...
+                `))
+
+                modulo.tempo.avancaTempo(4)
+
+                console.log(chalk.red(`${modulo.tempo.dia}º dia, ${modulo.tempo.hora}:00`))
+
+                console.log(chalk.blue(`Depois de ${chalk.blue.inverse('ajeiiiiitar')} tudo, você se sente ${chalk.blue.inverse('cannnsadoo')} então tem a ideia de dormir um ${chalk.blue.inverse('poucooo')}, afinal a escola também ${chalk.blue.inverse('nãooo')} é muito legal.
+
+                ${chalk.red('Você')} sente seu corpo dando uns espasmos e você ${chalk.red('não')} entende o significado daquilo, talvez seja por causa que levantou muito rápido de manhã, na verdade só ${chalk.red('pode')} ser isso, não tem outro significado. Para você isso parece quando estava prestes a... ${chalk.red('morrer')} naquele pesadelo...
+
+                Você deita, tenta respirar vira para o lad....
+                `))
+
                 break
             }
 
@@ -776,6 +974,94 @@ if (resposta.opcao === 'sim') {
         }
 
     }
+
+    console.log(gradient('cyan', 'red')(`................................................`))
+    console.log(gradient.rainbow('.....................pi.............pi...........pi......pi.............pi..........pi...........pi'))
+
+    console.log(chalk.blue(`
+    Você começa a sentir uma dor de cabeça bem forte e dores ao redor do corpo...
+
+    Por mais que tente mover o corpo, a única resposta que tem dele é a dor.
+
+    Tenta falar, mas nenhuma voz saí.
+
+    Você começa a se debater e o 'pi' fica cada vez mais próximo do outro, de repente sente uma mão segurar o seu braço, te acalmando um pouco.
+
+    Passados alguns minutos assim, você consegue abrir lentamente os olhos e para a sua surpresa, se encontra em um hospital, do seu lado segurando o seu braço tem uma mulher, ela parece muito preocupada e do outro lado tem um homem com roupa de médico.
+
+    -- ${chalk.grey(`Isso foi um baita de um milagre viu, o seu corpo foi bem guerreiro, sinta-se sortudo de estar vivo!`)} - Diz o médico olhando para você.
+
+    -- ${chalk.cyan(`a... aa...`)} - Você tenta falar, mas nenhuma voz sai da sua garganta...
+
+    -- ${chalk.grey(`Não tente falar agora tá? Descanse, você precisa, forçar o corpo agora não é uma boa escolha...`)}
+
+    Ainda grogue você não consegue raciocinar direito, cada vez ficando mais assustado com a situação.
+
+    -- ${chalk.green(`Amor, você me deixou preocupada, ficou quase 14 dias desacordado! Eu... Eu pensei que iria te perder!`)} - Diz a mulher te abraçando com cuidado...
+
+    Depois disso as lágrimas começam a escorrer sem parar do seu rosto e você começa a lembrar do que tinha acontecido...
+    `))
+
+    console.log(chalk.red(`
+    Depois que a sua mãe morreu por causa do excesso de trabalho, você começou a trabalhar muito para superar a perda dela, fora que precisava pagar as contas que estavam ainda no nome dela...
+    
+    Com o passar do tempo, você envelheceu e desenvolveu vício em bebidas, mesmo casando nunca deixou de trabalhar e beber, até que em um trágico dia...
+
+    Você bebeu muito na volta do trabalho, estava vomitando e passando mal, então viu no outro lado da rua uma tv com uma reportagem de um escritório, de tão bêbado que estava pensou que aquele era o seu escritório, o que acabou fazendo você atravessar a rua sem prestar atenção no transito e ser atropelado violentamente por um carro que não conseguiu desviar...
+
+    As últimas coisas que você pensava naquele momento eram 'trabalhar', 'trabalhar' e 'tenho que trabalhar'...
+    `))
+
+    console.log(chalk.blue(`
+    Depois de lembrar de tudo isso, você começa a chorar pois a sua mãe morreu... na verdade aquele sonho que ela estava viva se passavam dois anos antes dela morrer...
+
+    Você chora, tenta abraçar a sua esposa, tenta falar, mas não consegue fazer nenhuma dessas coisas...
+
+    A sala fica silenciosa, só sendo possível escutar o som dos choros e dos "pi's"....
+
+
+
+    Você começa a pedir perdão por tudo no pensamento, pede perdão para o seu corpo e para a sua esposa, pede perdão para a sua falecida mãe e principalmente pede perdão para o seu 'eu' do passado...
+
+    Mas você sabe, a sua história ainda não acabou, ainda mais com essa segunda chance que o seu corpo deu...
+    `))
+
+    console.log(chalk.red.italic(`ENQUANTO eu estiver VIVO, irei mudar os meus defeitos!...`))
+
+    resposta = await prompt(modulo.espera)
+
+    console.log(chalk.grey(`
+    Muito obrigado por jogar!
+    
+    Sei que o jogo não ficou muito longo, mas espero que essa jornada tenha tocado pelo menos um pouco na sua alma!
+
+    Antes de ir quero desejar que você jogador(a) seja feliz e que viva a vida que você deseja, sem deixar as coisas para resolver outro dia!
+
+    Um obrigado do fundo do meu coração <3 -
+    Giovanne Berteli. Criador e idealizador desse game!
+
+    E ah! Deixo aqui também informações importantes:
+
+        ${prova} de nota na prova!
+
+        ${frio} vezes que andou no frio!
+        ${sol} vezes que andou no calor!
+
+        ${conversouMãe} vezes que conversou com a sua mãe!
+        ${ajudou} vezes que ajudou a sua mãe!
+
+        ${vitima} vezes que foi assaltado!
+        ${escapou} vezes que fugiu do assaltos!
+        ${naoEscapou} vezes que não conseguiu fugir dos assaltos!
+
+        ${modulo.principal.dinheiro}.00 reais que você conseguiu!
+        ${dinheiroRua} vezes que achou dinheiro na rua!
+        ${perdeuDinheiro} vezes que perdeu dinheiro na rua!
+
+    Dito isso, lembre-se, a vida não é feita de status, mas de momentos, faça as escolhas certas e viva!!!! FUI.......
+
+    `))
+
 }
 
 //rando(5)

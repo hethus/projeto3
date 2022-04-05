@@ -235,4 +235,42 @@ let noite = [{
   ]
 }];
 
-export { tempo, principal, questao, trabalhe, espera, acordar, dentroEscola, aula, andarEscola, biblioteca, atrasado, voltou, tempoEstudoUm, tempoEstudoDois, tempoEstudoTres, tempoEstudoQuatro, tempoEstudoCinco, noite };
+
+function resultadoProva(probabilidade){
+if(probabilidade == 1){ // 10
+
+  return 10
+}else if(probabilidade > 1 && probabilidade <= 3){ // 9
+
+  return 9
+}else if(probabilidade > 3 && probabilidade <= 6){ // 8
+
+  return 8
+}else if(probabilidade > 6 && probabilidade <= 10){ // 7
+
+  return 7
+}else if(probabilidade > 10 && probabilidade <= 15){ // 6
+
+  return 6
+}else if(probabilidade > 15 && probabilidade <= 21){ // 5
+
+  return 5
+}else if(probabilidade > 21 && probabilidade <= 28){ // 4
+
+  return 4
+}else if(probabilidade > 28 && probabilidade <= 36){ // 3
+
+  return 3
+}else if(probabilidade > 36 && probabilidade <= 45){ // 2
+
+  return 2
+}else if(probabilidade > 45 && probabilidade <= 55){ // 1
+
+  return 1
+}
+}
+
+
+
+
+export { tempo, principal, questao, trabalhe, espera, acordar, dentroEscola, aula, andarEscola, biblioteca, atrasado, voltou, tempoEstudoUm, tempoEstudoDois, tempoEstudoTres, tempoEstudoQuatro, tempoEstudoCinco, noite, resultadoProva  };
