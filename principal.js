@@ -20,7 +20,6 @@ let tempo = {
           this.hora += time;
         } else {
             this.hora = 6;
-            this.dia++;
         }
     },
 
@@ -70,7 +69,7 @@ let questao = [{
     message: ' ',
     initial: 0,
     choices: [
-        { name: `continuar`, message: `${chalk.yellow.bold('continuar')}`},
+        { name: `continuar`, message: `${chalk.yellow.bold('continuar...')}`},
     ]
 }]; // await prompt(modulo.espera)
 
@@ -150,4 +149,90 @@ let biblioteca = [{
   ]
 }];
 
-export { tempo, principal, questao, trabalhe, espera, acordar, dentroEscola, aula, andarEscola, biblioteca, atrasado }
+let voltou = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: 'Continuar descansando até a tarde', message: `${chalk.yellow.bold('Continuar descansando até a tarde')}`},
+      { name: 'Estudar', message: `${chalk.yellow.bold('Estudar')}`},
+      { name: 'Fazer limonada para vender', message: `${chalk.yellow.bold('Fazer limonada para vender')}`},
+      { name: 'Ler algum livro', message: `${chalk.yellow.bold('Ler algum livro')}`},
+  ]
+}];
+
+let tempoEstudoUm = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: '1 hora', message: `${chalk.yellow.bold('1 hora')}`},
+      { name: '2 horas', message: `${chalk.yellow.bold('2 horas')}`},
+      { name: '3 horas', message: `${chalk.yellow.bold('3 horas')}`},
+      { name: '4 horas', message: `${chalk.yellow.bold('4 horas')}`},
+      { name: '5 horas', message: `${chalk.yellow.bold('5 horas')}`},
+  ]
+}];
+
+let tempoEstudoDois = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: '1 hora', message: `${chalk.yellow.bold('1 hora')}`},
+      { name: '2 horas', message: `${chalk.yellow.bold('2 horas')}`},
+      { name: '3 horas', message: `${chalk.yellow.bold('3 horas')}`},
+      { name: '4 horas', message: `${chalk.yellow.bold('4 horas')}`},
+  ]
+}];
+
+let tempoEstudoTres = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: '1 hora', message: `${chalk.yellow.bold('1 hora')}`},
+      { name: '2 horas', message: `${chalk.yellow.bold('2 horas')}`},
+      { name: '3 horas', message: `${chalk.yellow.bold('3 horas')}`},
+  ]
+}];
+
+let tempoEstudoQuatro = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: '1 hora', message: `${chalk.yellow.bold('1 hora')}`},
+      { name: '2 horas', message: `${chalk.yellow.bold('2 horas')}`},
+  ]
+}];
+
+let tempoEstudoCinco = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: '1 hora', message: `${chalk.yellow.bold('1 hora')}`},
+  ]
+}];
+
+let noite = [{
+  type: 'select',
+  name: 'opcao',
+  message: ' ',
+  initial: 0,
+  choices: [
+      { name: 'Estudar mais um pouco', message: `${chalk.yellow.bold('Estudar mais um pouco')}`},
+      { name: 'Jogar com o seu video-game de mão', message: `${chalk.yellow.bold('Jogar com o seu video-game de mão')}`},
+      { name: 'Ajudar a sua mãe na cozinha', message: `${chalk.yellow.bold('Ajudar a sua mãe na cozinha')}`},
+      { name: 'Descansar até a hora da janta', message: `${chalk.yellow.bold('Descansar até a hora da janta')}`},
+  ]
+}];
+
+export { tempo, principal, questao, trabalhe, espera, acordar, dentroEscola, aula, andarEscola, biblioteca, atrasado, voltou, tempoEstudoUm, tempoEstudoDois, tempoEstudoTres, tempoEstudoQuatro, tempoEstudoCinco, noite };
