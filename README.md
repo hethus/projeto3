@@ -9,7 +9,8 @@ Espero que gostem do game, é o terceiro e último projeto do primeiro módulo.
 + Sinopse:
 
 + Pelas setas do teclado é possível controlar uma vida inteira? Será que é um simples jogo?
-+ Talvez tudo foi criado para ter um belo e fácil para o programador, mas quem  sabe né, talvez tenha mais coisas em jogo do que um simples jogo...
++ Talvez tudo foi criado para ter um belo e fácil para o programador, mas quem  sabe né...
++ Talvez tenha mais coisas em jogo do que um simples jogo...
 
 
 
